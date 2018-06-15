@@ -9,6 +9,13 @@
 
 #include <stdio.h>
 #include <tchar.h>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <deque>
+#include <list>
+#include <stack>
+#include <queue>
 
 
 

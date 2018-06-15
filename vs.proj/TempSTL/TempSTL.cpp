@@ -2,13 +2,106 @@
 //
 
 #include "stdafx.h"
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <deque>
-#include <list>
 
 using namespace std;
+
+class ListTest
+{
+public:
+	ListTest(int value, char *str);
+	ListTest(ListTest &LT);
+	~ListTest();
+
+	void showValue();
+
+private:
+	int a;
+	char *cstr;
+};
+
+ListTest::ListTest(int value, char *str)
+{
+	cout << "构造函数" << endl;
+	a = value;
+	cstr = new char[a];
+	if (cstr != 0)
+		strcpy(cstr, str);
+}
+
+ListTest::ListTest(ListTest & LT)
+{
+	cout << "拷贝构造函数" << endl;
+	a = LT.a;
+	cstr = new char[a];
+	if (cstr != 0)
+		strcpy(cstr, LT.cstr);
+}
+
+ListTest::~ListTest()
+{
+	cout << "析构函数" << endl;
+	if (cstr != NULL)
+	{
+		cout << "ahh" << endl;
+	}
+	delete[]cstr;
+}
+
+void ListTest::showValue()
+{
+	cout << "hello ListTest" << endl;
+	cout << this->a << endl;
+	cout << this->cstr << endl;
+	cout << "bye print" << endl;
+}
+
+void testList()
+{
+
+	list<int> l;
+	l.push_back(1);
+	l.push_back(2);
+	l.push_back(3);
+	l.push_back(8);
+	l.push_front(0);
+	//l.insert(l.begin(), 6);
+	//l.assign(1, 88);
+	list<int> ll;
+	ll.assign({ 1,2,3 });
+
+	//ll.splice(ll.begin()++, l);
+	l.merge(ll);
+
+	list<int>::iterator ls = l.begin();
+	// 	for (;ls != l.end(); ls++)
+	// 	{
+	// 		cout << *ls << endl;
+	// 	}
+	// 	for each (auto var in l)
+	// 	{
+	// 		cout << var << endl;
+	// 	}
+	for (auto var : l)
+	{
+		cout << var << endl;
+	}
+
+
+	cout << "-------------------------------" << endl;
+
+	list<int>::iterator lss = ll.begin();
+	for (; lss != ll.end(); lss++)
+	{
+		cout << *lss << endl;
+	}
+
+	int aa[10] = { 1,2,3,4,5,6,7,8,9,0 };
+	aa[1] = 1;
+	for (int i = 0; i < 10; i++)
+	{
+		cout << aa[i] << endl;
+	}
+}
 
 ///testVector
 void testVector()
@@ -63,10 +156,20 @@ void testVector()
 	//reverse()
 }
 
-void testList()
+void testClass()
 {
-	list<int> ls;
-	list<int> lss;
+	char *ch = new char[2];
+	ch[0] = 'a';
+	ListTest *lt = new ListTest(1, ch);
+	lt->showValue();
+	cout << "YES COPY" << endl;
+	ListTest *lt1 = new ListTest(*lt);
+	lt1->showValue();
+
+	delete[] ch;
+	cout << "DELETE" << endl;
+	delete lt;
+	delete lt1;
 }
 
 void testDeque()
@@ -105,6 +208,29 @@ void testDeque()
 	{
 		cout << var << endl;
 	}
+}
+
+void testStack()
+{
+	stack<int> st;
+	st.push(1);
+	st.push(2);
+	st.push(3);
+	st.pop();
+	int a = st.top();
+	cout << "a: " << a << endl;
+}
+
+void testQueue()
+{
+	queue<string> qu;
+	qu.push("a");
+	qu.push("b");
+	qu.push("c");
+	qu.pop();
+	string str1 = qu.back();
+	string str = qu.front();
+	cout << str.c_str() << endl;
 }
 
 int main()
