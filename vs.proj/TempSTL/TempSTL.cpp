@@ -233,11 +233,43 @@ void testQueue()
 	cout << str.c_str() << endl;
 }
 
+void testSet()
+{
+	set<int> s;
+	s.insert(1);
+	s.insert(5);
+	s.insert(6);
+	s.insert(2);
+	s.insert(3);
+//	s.clear(); //清除所有内容
+	s.erase(2); //清除指定内容
+	//set中不能插入相同的值
+	set<int>::iterator sit = s.find(6);
+	set<int>::iterator sits = s.upper_bound(2);
+	set<int>::iterator sitss = s.lower_bound(2);
+
+	cout << "-------------" << endl;
+	cout << s.max_size() << endl;
+	cout << s.size() << endl;
+	cout << *sits << endl;
+	cout << *sitss << endl;
+	cout << "-------------" << endl;
+	s.erase(sits);
+
+	set<int>::iterator it = s.begin();
+	for (;it != s.end(); it ++)
+	{
+		cout << *it << endl;
+	}
+}
+
 int main()
 {
 	//testVector();
 
-	testDeque();
+	//testDeque();
+
+	testSet();
 
 	int a;
 	cin >> a;
