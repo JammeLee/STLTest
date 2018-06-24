@@ -263,13 +263,52 @@ void testSet()
 	}
 }
 
+void testMultiset()
+{
+	multiset<int> ms;
+	ms.insert(1);
+	ms.insert(2);
+	ms.insert(2);
+	ms.insert(3);
+	ms.insert(2);
+
+	multiset<int, greater<int>> msg; //从大到小  默认为less 从小到大~
+	msg.insert(1);
+	msg.insert(2);
+	msg.insert(2);
+	msg.insert(3);
+	for each (auto var in msg)
+	{
+		cout << var << endl;
+	}
+	//set不可以插入相同的值，但是multiset可以插入相同的值
+	multiset<int>::iterator it = ms.begin();
+	auto its = it;
+	for (; its != ms.end(); its++)
+	{
+		cout << *its << endl;
+	}
+	cout << "----------------------" << endl;
+	cout << *it << endl;
+	multiset<int>::iterator it_end = ms.end();
+// 	if (*it_end == NULL)//==运算符会报错
+// 		cout << "it_end is nullptr" << endl;
+	//cout << *it_end << endl; //最后一个元素的下一个位置
+	multiset<int>::reverse_iterator it_rbegin = ms.rbegin(); // 指向逆向迭代的第一个元素
+	cout << *it_rbegin << endl;
+	multiset<int>::reverse_iterator it_rend = ms.rend(); //指向逆向迭代的最后一个元素的下一个位置
+	//cout << *it_rend << endl;
+}
+
 int main()
 {
 	//testVector();
 
 	//testDeque();
 
-	testSet();
+	//testSet();
+
+	testMultiset();
 
 	int a;
 	cin >> a;
