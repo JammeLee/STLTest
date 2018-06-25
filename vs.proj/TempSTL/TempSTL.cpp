@@ -300,6 +300,36 @@ void testMultiset()
 	//cout << *it_rend << endl;
 }
 
+void testMap()
+{
+	map<string, int> mp;
+	
+	//insert方法插入，如果插入关键字相同，则无法插入
+	mp.insert(pair<string, int>("a", 1));
+	mp.insert(map<string, int>::value_type("b", 2));
+	pair<map<string, int>::iterator, bool> it_pair = mp.insert(pair<string, int>("b", 6)); //这里的6没能被插入，所以打印出来的b对应的还是2
+	//可以通过pair来获取insert是否成功，如果成功，则second字段返回为true，否则为false。那么first则是返回map的迭代器，就是对应key位置的迭代器。
+	if (it_pair.second)
+		cout << "insert is success" << endl;
+	else
+		cout << "insert is fail, now the key is " << it_pair.first->first.c_str() << ", the value is " << it_pair.first->second << endl;
+
+	//mp.insert(pair<string, int>("c", 3));
+	//数组方式插入时，如果插入关键字相同，则之前的关键字会被覆盖
+	mp["c"] = 3;
+	mp["c"] = 5; // 这里原来c对应的3已经被覆盖，此时为5
+	mp.insert(pair<string, int>("d", 4));
+
+	cout << mp.at("a") << endl;
+
+	map<string, int>::iterator it = mp.begin();
+	for (; it != mp.end(); it++)
+	{
+		cout << it->first.c_str() << ": " << it->second << endl;
+	}
+
+}
+
 int main()
 {
 	//testVector();
@@ -308,7 +338,9 @@ int main()
 
 	//testSet();
 
-	testMultiset();
+	//testMultiset();
+
+	testMap();
 
 	int a;
 	cin >> a;
